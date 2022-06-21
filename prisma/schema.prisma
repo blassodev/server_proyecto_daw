@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int             @id @default(autoincrement())
+  username     String          @unique
+  name         String
+  surnames     String
+  password     String
+  isAdmin      Boolean         @default(false)
+  rentedBooks  RentedBook[]
+  rentedMovies UsersOnMovies[]
+}
+
+model BookAuthor {
+  id       Int          @id @default(autoincrement())
+  name     String
+  surnames String
+  bio      String
+  age      Int
+  books    RentedBook[]
+}
+
+model RentedBook {
+  id       Int        @id @default(autoincrement())
+  name     String
+  author   BookAuthor @relation(fields: [authorId], references: [id])
+  authorId Int
+  score    Int
+  User     User?      @relation(fields: [userId], references: [id])
+  userId   Int?
+}
+
+model MovieDirector {
+  id       Int           @id @default(autoincrement())
+  name     String
+  surnames String
+  bio      String
+  age      Int
+  movies   RentedMovie[]
+}
+
+model RentedMovie {
+  id              Int             @id @default(autoincrement())
+  name            String
+  director        MovieDirector   @relation(fields: [movieDirectorId], references: [id])
+  movieDirectorId Int
+  year            Int
+  score           Int
+  users           UsersOnMovies[]
+}
+
+model UsersOnMovies {
+  user             User        @relation(fields: [userId], references: [id])
+  userId           Int
+  movie            RentedMovie @relation(fields: [movieId], references: [id])
+  movieId          Int
+  assignedAt       DateTime    @default(now())
+  expiresInMinutes Int         @default(4320)
+
+  @@id([userId, movieId])
+}
