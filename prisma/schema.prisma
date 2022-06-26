@@ -38,6 +38,7 @@ model RentedBook {
   score    Int
   User     User?      @relation(fields: [userId], references: [id])
   userId   Int?
+  imageUrl String
 }
 
 model MovieDirector {
@@ -56,6 +57,7 @@ model RentedMovie {
   movieDirectorId Int
   year            Int
   score           Int
+  imageUrl        String
   users           UsersOnMovies[]
 }
 
