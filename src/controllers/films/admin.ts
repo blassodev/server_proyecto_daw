@@ -113,3 +113,14 @@ export const deleteFilm = async (req: Request, res: Response) => {
 
   res.status(202).json(deleted);
 };
+
+export const deleteFilms = async (req: Request, res: Response) => {
+  const { ids } = req.body;
+  const deleteds = await prisma.rentedMovie.deleteMany({
+    where: {
+      id: { in: ids },
+    },
+  });
+
+  res.status(202).json(deleteds);
+};

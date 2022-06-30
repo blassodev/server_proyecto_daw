@@ -2,6 +2,7 @@ import { Router } from "express";
 import { getFilms } from "../controllers/films";
 import {
   deleteFilm,
+  deleteFilms,
   getAllFilms,
   postNewFilm,
   updateFilm,
@@ -16,3 +17,4 @@ filmsRouter.get("/admin", checkAdmin, getAllFilms);
 filmsRouter.post("/admin", checkAdmin, postNewFilm);
 filmsRouter.put("/admin/:id", checkAdmin, updateFilm);
 filmsRouter.delete("/admin/:id", checkAdmin, deleteFilm);
+filmsRouter.post("/admin/delete", checkAdmin, deleteFilms);
