@@ -11,6 +11,7 @@ import { directorsRouter } from "./routes/directors";
 import { authJwt } from "./middleware/authentication";
 import { booksRouter } from "./routes/books";
 import { authorsRouter } from "./routes/authors";
+import { usersRouter } from "./routes/users";
 
 //Conf
 export const prisma = new PrismaClient();
@@ -30,6 +31,7 @@ app.use("/films", authJwt, filmsRouter);
 app.use("/books", authJwt, booksRouter);
 app.use("/authors", authJwt, authorsRouter);
 app.use("/directors", authJwt, directorsRouter);
+app.use("/users", authJwt, usersRouter);
 
 //Listen
 app.listen(port, () => {
