@@ -51,3 +51,14 @@ export const deleteDirector = async (req: Request, res: Response) => {
 
   res.json(deleted);
 };
+
+export const deleteDirectors = async (req: Request, res: Response) => {
+  const { ids } = req.body;
+  const deleteds = await prisma.movieDirector.deleteMany({
+    where: {
+      id: { in: ids },
+    },
+  });
+
+  res.status(202).json(deleteds);
+};

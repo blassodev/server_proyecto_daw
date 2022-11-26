@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createDirector,
   deleteDirector,
+  deleteDirectors,
   getAllDirectors,
   updateDirector,
 } from "../controllers/directors";
@@ -13,3 +14,4 @@ directorsRouter.get("/", checkAdmin, getAllDirectors);
 directorsRouter.post("/", checkAdmin, createDirector);
 directorsRouter.put("/:id", checkAdmin, updateDirector);
 directorsRouter.delete("/:id", checkAdmin, deleteDirector);
+directorsRouter.post("/", checkAdmin, deleteDirectors);
