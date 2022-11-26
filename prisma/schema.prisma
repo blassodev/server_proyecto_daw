@@ -33,10 +33,10 @@ model BookAuthor {
 model RentedBook {
   id       Int        @id @default(autoincrement())
   name     String
-  author   BookAuthor @relation(fields: [authorId], references: [id])
+  author   BookAuthor @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId Int
   score    Int
-  User     User?      @relation(fields: [userId], references: [id])
+  User     User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   Int?
   imageUrl String
 }
@@ -53,7 +53,7 @@ model MovieDirector {
 model RentedMovie {
   id              Int             @id @default(autoincrement())
   name            String
-  director        MovieDirector   @relation(fields: [movieDirectorId], references: [id])
+  director        MovieDirector   @relation(fields: [movieDirectorId], references: [id], onDelete: Cascade)
   movieDirectorId Int
   year            Int
   score           Int
@@ -62,9 +62,9 @@ model RentedMovie {
 }
 
 model UsersOnMovies {
-  user             User        @relation(fields: [userId], references: [id])
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           Int
-  movie            RentedMovie @relation(fields: [movieId], references: [id])
+  movie            RentedMovie @relation(fields: [movieId], references: [id], onDelete: Cascade)
   movieId          Int
   assignedAt       DateTime    @default(now())
   expiresInMinutes Int         @default(4320)

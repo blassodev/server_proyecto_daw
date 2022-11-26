@@ -14,4 +14,4 @@ directorsRouter.get("/", checkAdmin, getAllDirectors);
 directorsRouter.post("/", checkAdmin, createDirector);
 directorsRouter.put("/:id", checkAdmin, updateDirector);
 directorsRouter.delete("/:id", checkAdmin, deleteDirector);
-directorsRouter.post("/", checkAdmin, deleteDirectors);
+directorsRouter.post("/delete", checkAdmin, deleteDirectors);
