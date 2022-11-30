@@ -124,3 +124,19 @@ export const deleteFilms = async (req: Request, res: Response) => {
 
   res.status(202).json(deleteds);
 };
+
+export const relationUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { userId, assignedAt, expiresInMinutes } = req.body;
+
+  const relationed = await prisma.usersOnMovies.create({
+    data: {
+      movieId: Number(id),
+      userId,
+      assignedAt,
+      expiresInMinutes,
+    },
+  });
+
+  res.status(200).json(relationed);
+};

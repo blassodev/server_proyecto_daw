@@ -5,6 +5,7 @@ import {
   deleteFilms,
   getAllFilms,
   postNewFilm,
+  relationUser,
   updateFilm,
 } from "../controllers/films/admin";
 import { checkAdmin } from "../utils/roles";
@@ -18,3 +19,4 @@ filmsRouter.post("/admin", checkAdmin, postNewFilm);
 filmsRouter.put("/admin/:id", checkAdmin, updateFilm);
 filmsRouter.delete("/admin/:id", checkAdmin, deleteFilm);
 filmsRouter.post("/admin/delete", checkAdmin, deleteFilms);
+filmsRouter.post("/admin/relation", checkAdmin, relationUser);
